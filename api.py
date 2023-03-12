@@ -2,6 +2,9 @@ import requests
 import json
 from file import store
 from datetime import datetime
+import time
+
+import constant
 
 
 def bank_nifty(symbol='BANKNIFTY'):
@@ -10,8 +13,14 @@ def bank_nifty(symbol='BANKNIFTY'):
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept-Language': 'en-US,en;q=0.9,hi;q=0.8'}
   url = "https://www.nseindia.com/api/option-chain-indices?symbol="+symbol
+
+  if symbol != constant.symbols.get("BANKNIFTY"):
+    url = "https://www.nseindia.com/api/"+ "option-chain-equities?symbol="+symbol
+
+  print(url)
+
   json_obj = requests.get(url, headers=headers).json()
-  
+
   return json_obj
 
 def process_nifty(symbol='BANKNIFTY', range = 300):
@@ -33,7 +42,15 @@ def process_nifty(symbol='BANKNIFTY', range = 300):
   data["underlyingValue"] = underlyingValue
   data["ceCOITotal"] = ceCOITotal
   data["peCOITotal"] = peCOITotal
+  data["symbol"] = symbol
 
   print(data)
   store(data)
 
+def fetchAndStoreNiftyData():
+  for symbol in constant.symbols.values():
+    try:
+      process_nifty(symbol, 100)
+    except:
+      pass
+    # time.sleep(10)

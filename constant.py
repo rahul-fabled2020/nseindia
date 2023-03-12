@@ -1,0 +1,10 @@
+# 'INDUSTRIAL': '',
+
+symbols = {
+  'HDFC': 'HDFCBANK',
+  'ICICI': 'ICICIBANK',
+  'KOTAK_MAHINDRA': 'KOTAKBANK',
+  'AXIS': 'AXISBANK',
+  'SBI': 'SBIN',
+  'BANKNIFTY': 'BANKNIFTY'
+}

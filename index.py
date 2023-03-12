@@ -1,5 +1,5 @@
 import flask
-from api import bank_nifty, process_nifty
+from api import bank_nifty, fetchAndStoreNiftyData
 # from concurrent.futures import ThreadPoolExecutor
 import datetime
 # import schedule
@@ -39,5 +39,5 @@ def load_json(file_name):
 if __name__ == '__main__':
     # executor = ThreadPoolExecutor(max_workers=1)
     # executor.submit(scheduler)
-    setInterval(120, process_nifty)
+    setInterval(120, fetchAndStoreNiftyData)
     app.run(host="0.0.0.0")
